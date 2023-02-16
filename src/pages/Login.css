@@ -1,0 +1,98 @@
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.signup-wrapper {
+    border: 1px solid rgb(205, 205, 205);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    width: 350px;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.my-logo {
+    font-family: billabong;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.logo-message {
+    font-size: 1.5rem;
+    color: #8e8e8e;
+    text-align: center;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.email-input,
+.username-input,
+.name-input,
+.password-input {
+    border: 1px solid rgb(220, 220, 220);
+    padding: 15px;
+    width: 300px;
+    background-color: #fafafa;
+    border-radius: 5px;
+}
+
+.email-input:focus,
+.username-input:focus,
+.name-input:focus,
+.password-input:focus {
+    outline: 1px solid fafafa;
+}
+
+.terms1,
+.terms2 {
+    color: #8e8e8e;
+    text-align: center;
+    font-size: 0.8rem;
+    margin: 5px;
+}
+
+.sign-up-submit {
+    background-color: #4bb4f8;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    width: 90%;
+    padding-block: 10px;
+    border-radius: 10px;
+}
+
+.sign-up-submit:hover {
+    cursor: pointer;
+    background-color: #1a98ec;
+}
+
+/* Already have an account */
+
+.already-account {
+    border: 1px solid rgb(205, 205, 205);
+    padding: 20px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.log-in {
+    color: #4bb4f8;
+}
+
+.log-in:hover {
+    cursor: pointer;
+    color: #1a98ec;
+}

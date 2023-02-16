@@ -1,0 +1,85 @@
+.my-logo {
+    font-family: billabong;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+.navContainer {
+    position: fixed;
+    background-color: #000;
+    color: white;
+    width: 250px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 16px;
+    font-family: 'PT Sans', sans-serif;
+    border-right: 0.1px solid grey;
+
+}
+
+.navIcon-box {
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    width: 150px;
+    gap: 20px;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+.navIcon-box:hover {
+    background-color: rgb(36, 36, 36);
+    cursor: pointer;
+}
+
+.Allnav-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 200px;
+}
+
+.showThis {
+    display: none;
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+@media only screen and (max-width:1263px) {
+
+    .hideThis {
+        display: none;
+    }
+
+
+    .navContainer {
+        display: flex;
+        align-items: center;
+        width: 100px;
+    }
+
+    .navIcon-box {
+        width: max-content;
+    }
+
+    .showThis {
+        display: block;
+    }
+}

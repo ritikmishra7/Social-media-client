@@ -1,0 +1,81 @@
+.suggestion-section {
+    position: fixed;
+    top: 0;
+    right: 180px;
+    color: white;
+    padding-top: 50px;
+}
+
+.switch-account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+    margin-bottom: 50px;
+}
+
+.left-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.account-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.switch-btn {
+    color: rgb(0, 149, 246);
+}
+
+.switch-btn:hover {
+    cursor: pointer;
+    color: white;
+}
+
+/* accounts to follow */
+
+.suggestion-writing {
+    color: rgb(200, 200, 200)
+}
+
+.accounts-to-follow {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.to-follow-header {
+    display: flex;
+    gap: 100px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.see-all-btn:hover {
+    cursor: pointer;
+}
+
+.follow-btn:hover {
+    cursor: pointer;
+}
+
+.suggestion-account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.suggestion-account-left-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.followed-by {
+    font-size: 0.8rem;
+}

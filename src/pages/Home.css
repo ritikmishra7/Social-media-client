@@ -1,0 +1,14 @@
+.main-section {
+    width: 100%;
+    background-color: #000;
+    padding-right: 20px;
+    color: white;
+}
+
+.story-section {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    padding-top: 50px;
+    align-items: center;
+}
