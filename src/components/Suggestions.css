@@ -1,7 +1,7 @@
 .suggestion-section {
     position: fixed;
     top: 0;
-    right: 180px;
+    right: 5%;
     color: white;
     padding-top: 50px;
 }
@@ -78,4 +78,13 @@
 
 .followed-by {
     font-size: 0.8rem;
+}
+
+
+@media only screen and (max-width:1263px) {
+
+    .suggestion-section {
+        display: none;
+    }
+
 }
