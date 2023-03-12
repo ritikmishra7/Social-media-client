@@ -5,7 +5,7 @@ import profileImg from '../../assets/default-profile-pic.jpg'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUserProfile } from '../../internal';
+import { settoastData, updateUserProfile } from '../../internal';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Notfound from '../../pages/Notfound/Notfound';
@@ -49,12 +49,14 @@ function Profile() {
     const handleEdit = (e) => {
         e.preventDefault();
         try {
+            dispatch(settoastData({ type: 'info', message: 'Updating Profile...' }));
             dispatch(updateUserProfile({
                 name,
                 bio,
                 username,
                 email
             }))
+            dispatch(settoastData({ type: 'success', message: 'Profile Updated Successfully' }));
             handleClose();
         } catch (error) {
             console.log(error);
@@ -96,10 +98,12 @@ function Profile() {
     const handlesaveProfilePic = async (e) => {
         e.preventDefault();
         try {
+            dispatch(settoastData({ type: 'info', message: 'Updating Profile Image...' }));
             dispatch(updateUserProfile({
                 avatar
             }));
             setChangeProfile(false);
+            dispatch(settoastData({ type: 'success', message: 'Image Updated Successfully' }));
             handleClose();
         } catch (error) {
             console.log(error);

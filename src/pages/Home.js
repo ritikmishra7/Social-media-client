@@ -9,7 +9,7 @@ function Home() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getMyInfo());
-    }, [])
+    }, [dispatch])
 
     return (
         <div className='home-div'>

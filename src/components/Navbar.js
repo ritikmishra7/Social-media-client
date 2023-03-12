@@ -42,13 +42,13 @@ function Navbar() {
         e.preventDefault();
 
         try {
-            // dispatch(settoastData({ type: 'info', message: 'Logging out...' }))
+            dispatch(settoastData({ type: 'info', message: 'Logging out...' }))
             await axiosClient.post('/auth/logout');
             removeItem(ACCESS_TOKEN_KEY);
-            // dispatch(settoastData({ type: 'success', message: 'Logged out successfully' }))
+            dispatch(settoastData({ type: 'success', message: 'Logged out successfully' }))
             navigate('/auth/login');
         } catch (error) {
-            // dispatch(settoastData({ type: 'error', message: error }))
+
         }
     }
 

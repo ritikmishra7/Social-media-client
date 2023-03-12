@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Box, Button, Divider, Modal, TextField, Tooltip, Typography } from '@mui/material'
 import { BiImage } from 'react-icons/bi'
 import './Userposts.css'
-import { CreateNewPost } from '../../internal';
+import { CreateNewPost, settoastData } from '../../internal';
 import Post from '../Post';
 
 
@@ -43,9 +43,11 @@ function Userposts() {
     async function handleAddpost(e) {
         e.preventDefault();
         try {
+            dispatch(settoastData({ type: 'info', message: 'Creating Post...' }));
             dispatch(CreateNewPost({ caption, postImg }));
             setcaption('');
             setpostImg('')
+            dispatch(settoastData({ type: 'success', message: 'Post Created Successfully' }));
         } catch (error) {
             console.log(error);
         }

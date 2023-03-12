@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import profileImg from '../../assets/default-profile-pic.jpg'
 import "./Userprofile.css"
-import { FollowUnfollow, getUserProfile } from '../../internal';
+import { FollowUnfollow, getUserProfile, settoastData } from '../../internal';
 import { RiSettings2Line } from 'react-icons/ri';
 import Otheruserposts from './Otheruserposts';
 
@@ -49,10 +49,12 @@ function Userprofile() {
 
     async function handleFollowUnfollow() {
         try {
+            dispatch(settoastData({ type: 'info', message: 'Following User...' }));
             const userIdToFollow = userProfile?._id;
             dispatch(FollowUnfollow({ userIdToFollow }));
+            dispatch(settoastData({ type: 'success', message: 'User Followed Successfully' }));
         } catch (error) {
-            console.log(error);
+
         }
     }
 

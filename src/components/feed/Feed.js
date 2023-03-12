@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Box, Button, createTheme, TextField, ThemeProvider, Tooltip } from '@mui/material';
-import { CreateNewPost } from '../../internal';
+import { CreateNewPost, settoastData } from '../../internal';
 import { getFeed } from '../../internal';
 import Nopostavailable from '../Nopostavailable/Nopostavailable';
 import { BiImage } from 'react-icons/bi';
@@ -22,14 +22,13 @@ function Feed() {
     async function handleAddpost(e) {
         e.preventDefault();
         try {
-            // dispatch(settoastData({ type: 'info', message: 'Creating Post...' }));
+            dispatch(settoastData({ type: 'info', message: 'Creating Post...' }));
             dispatch(CreateNewPost({ caption, postImg }));
             setcaption('');
             setpostImg('')
-            // dispatch(settoastData({ type: 'success', message: 'Post Created Successfully' }));
+            dispatch(settoastData({ type: 'success', message: 'Post Created Successfully' }));
         } catch (error) {
             console.log(error);
-            // dispatch(settoastData({ type: 'error', message: e }));
         }
     }
 
@@ -91,7 +90,7 @@ function Feed() {
                 </ThemeProvider>
             </div>
             <div className='posts center-thing'>
-                {feedData?.posts?.length ? feedData?.posts?.map((post) => { return <Post post={post} key={post._id} /> }) :
+                {posts?.length ? feedData?.posts?.map((post) => { return <Post post={post} key={post._id} /> }) :
                     <Nopostavailable />
                 }
 

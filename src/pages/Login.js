@@ -31,11 +31,12 @@ function Login() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
+            dispatch(settoastData({ type: 'info', message: 'Logging in...' }));
             const reply = await axiosClient.post('/auth/login', {
                 email_username, password
             });
-
             setItem(ACCESS_TOKEN_KEY, reply.result.accessToken);
+            dispatch(settoastData({ type: 'success', message: 'Logged in successfully' }));
             navigate('/');
         } catch (e) {
             if (e === 'All fields are required') {

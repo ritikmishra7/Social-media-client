@@ -8,7 +8,7 @@ import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import profileImg from '../assets/default-profile-pic.jpg';
 import './Post.css'
-import { LikeUnlikePost, LikeUnlikeUserPost, LikeUnlikeFeed } from '../internal';
+import { LikeUnlikePost, LikeUnlikeUserPost, LikeUnlikeFeed, settoastData } from '../internal';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Container } from '@mui/material';
@@ -37,15 +37,22 @@ function Post({ post }) {
 
     function handleLikeUnlike(e) {
         e.preventDefault();
-        if (userId === myProfile?._id) {
-            dispatch(LikeUnlikePost({ postId: post._id }));
+        try {
+            dispatch(settoastData({ type: 'info', message: 'Liking Post...' }));
+            if (userId === myProfile?._id) {
+                dispatch(LikeUnlikePost({ postId: post._id }));
+            }
+            else if (userId) {
+                dispatch(LikeUnlikeUserPost({ postId: post._id }));
+            }
+            else {
+                dispatch(LikeUnlikeFeed({ postId: post._id }));
+            }
+            dispatch(settoastData({ type: 'success', message: 'Post Liked/Unliked Successfully' }));
+        } catch (error) {
+
         }
-        else if (userId) {
-            dispatch(LikeUnlikeUserPost({ postId: post._id }));
-        }
-        else {
-            dispatch(LikeUnlikeFeed({ postId: post._id }));
-        }
+
 
     }
 

@@ -76,11 +76,13 @@ export default function Topbar() {
         e.preventDefault();
 
         try {
+            dispatch(settoastData({ type: 'info', message: 'Logging Out...' }));
             await axiosClient.post('/auth/logout');
             removeItem(ACCESS_TOKEN_KEY);
+            dispatch(settoastData({ type: 'success', message: 'Logged Out Successfully' }));
             navigate('/auth/login');
         } catch (error) {
-            console.log(error);
+
         }
     }
 

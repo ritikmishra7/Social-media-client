@@ -3,7 +3,7 @@ import { Avatar, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import profileImg from '../../assets/default-profile-pic.jpg';
-import { FollowUser } from '../../internal';
+import { FollowUser, settoastData } from '../../internal';
 
 function Singlesuggestionaccount({ suggestion }) {
 
@@ -13,8 +13,14 @@ function Singlesuggestionaccount({ suggestion }) {
 
     const handleFollow = (e) => {
         e.preventDefault();
-        setFollowing(true);
-        dispatch(FollowUser({ userIdToFollow: suggestion._id }))
+        try {
+            dispatch(settoastData({ type: 'info', message: 'Following User...' }));
+            setFollowing(true);
+            dispatch(FollowUser({ userIdToFollow: suggestion._id }))
+            dispatch(settoastData({ type: 'success', message: 'User Followed Successfully' }));
+        } catch (error) {
+
+        }
     }
 
     return (
