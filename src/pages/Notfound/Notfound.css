@@ -1,0 +1,46 @@
+.notFound-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    gap: 80px;
+}
+
+.error-code {
+    font-size: 15rem;
+}
+
+.NOTFOUND {
+    font-size: 5rem;
+    color: #c70000;
+}
+
+.redirect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.redirect-message {
+    font-size: 3rem;
+}
+
+@media only screen and (max-width:766px) {
+
+    .error-code {
+        font-size: 8rem;
+    }
+
+    .NOTFOUND {
+        font-size: 3rem;
+    }
+
+    .redirect-message {
+        font-size: 1.5rem;
+    }
+
+}

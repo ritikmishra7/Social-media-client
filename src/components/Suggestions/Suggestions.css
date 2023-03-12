@@ -8,17 +8,24 @@
 
 .switch-account {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 100px;
     margin-bottom: 50px;
 }
+
 
 .left-section {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
+    padding: 15px;
+    border-radius: 25px;
+}
+
+.left-section:hover {
+    background-color: rgb(36, 36, 36);
+    cursor: pointer;
 }
 
 .account-info {
@@ -67,6 +74,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: rgb(39, 39, 39);
+    padding: 15px;
+    border-radius: 16px;
+    gap: 15px;
 }
 
 .suggestion-account-left-side {
@@ -76,12 +87,30 @@
     gap: 15px;
 }
 
+.suggestion-account-left-side:hover {
+    cursor: pointer;
+}
+
 .followed-by {
     font-size: 0.8rem;
 }
 
+.suggestion-account-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: flex-start;
+}
 
-@media only screen and (max-width:1263px) {
+.follow-btn {
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+}
+
+
+@media only screen and (max-width:1000px) {
 
     .suggestion-section {
         display: none;

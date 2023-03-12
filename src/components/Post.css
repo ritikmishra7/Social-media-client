@@ -16,11 +16,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 
 .post-img {
     width: 100%;
+    border-radius: 10px;
+}
+
+.post-avatar {
+    cursor: pointer;
 }
 
 /* post footer */
@@ -46,9 +52,10 @@
     outline: none;
     width: 100%;
     padding: 2px 2px 15px 2px;
-    background-color: black;
+    background-color: rgb(39, 39, 39);
     color: white;
     border-bottom: 1px solid grey;
+
 }
 
 .comment-box {
@@ -73,4 +80,18 @@
     position: absolute;
     bottom: 40px;
     right: 5px;
+}
+
+.caption-without-image {
+    padding: 5px;
+    border-radius: 10px;
+    margin-block: 5px;
+}
+
+.hover-grey:hover {
+    color: rgb(197, 197, 197);
+}
+
+.time-ago {
+    color: rgb(184, 184, 184);
 }

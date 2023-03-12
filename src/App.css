@@ -3,6 +3,10 @@
   src: url(../src/fonts/billabong.ttf);
 }
 
+body {
+  background-color: black;
+  color: white;
+}
 
 .profileImg-box {
   width: 30px;
@@ -13,6 +17,33 @@
 
 .center-thing {
   max-width: 460px;
-  margin: auto;
+  margin-inline: auto;
 
+}
+
+@media only screen and (max-width:1263px) {
+
+  .center-thing {
+    margin-left: 10%;
+  }
+
+}
+
+@media only screen and (max-width:1000px) {
+
+  .center-thing {
+    margin-inline: auto;
+  }
+
+}
+
+@media only screen and (max-width:766px) {
+
+  .center-thing {
+    width: 90%;
+  }
+
+  .posts {
+    margin-bottom: 80px;
+  }
 }

@@ -2,17 +2,21 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: fit-content;
+    color: white;
 }
 
 
 .signup-wrapper {
     border: 1px solid rgb(205, 205, 205);
     padding: 20px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     margin-top: 15px;
     width: 350px;
     font-family: 'PT Sans', sans-serif;
+    background-color: rgb(39, 39, 39);
 }
 
 .my-logo {
@@ -35,24 +39,6 @@
     align-items: center;
     margin-top: 20px;
     gap: 10px;
-}
-
-.email-input,
-.username-input,
-.name-input,
-.password-input {
-    border: 1px solid rgb(220, 220, 220);
-    padding: 15px;
-    width: 300px;
-    background-color: #fafafa;
-    border-radius: 5px;
-}
-
-.email-input:focus,
-.username-input:focus,
-.name-input:focus,
-.password-input:focus {
-    outline: 1px solid fafafa;
 }
 
 .terms1,
@@ -87,6 +73,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 16px;
+    background-color: rgb(39, 39, 39);
 }
 
 .log-in {

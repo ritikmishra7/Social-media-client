@@ -36,24 +36,6 @@
     gap: 10px;
 }
 
-.email-input,
-.username-input,
-.name-input,
-.password-input {
-    border: 1px solid rgb(220, 220, 220);
-    padding: 15px;
-    width: 300px;
-    background-color: #fafafa;
-    border-radius: 5px;
-}
-
-.email-input:focus,
-.username-input:focus,
-.name-input:focus,
-.password-input:focus {
-    outline: 1px solid fafafa;
-}
-
 .terms1,
 .terms2 {
     color: #8e8e8e;

@@ -1,0 +1,113 @@
+.profile-section {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 50px;
+    width: fit-content;
+    margin: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.info-section {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background-color: rgb(39, 39, 39);
+    padding: 20px;
+}
+
+.bio-section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: baseline;
+}
+
+.bio-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.bio-info {
+    display: flex;
+    gap: 40px;
+}
+
+.avatar-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    height: fit-content;
+}
+
+.labelImg {
+    border: 2px dotted rgb(112, 214, 243);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.inputImg {
+    display: none;
+}
+
+@media only screen and (max-width:1290px) {
+    .info-section {
+        gap: 40px;
+
+    }
+}
+
+@media only screen and (max-width:1000px) {
+
+    .info-section {
+        gap: 10px;
+        padding: 10px;
+    }
+
+}
+
+@media only screen and (max-width:766px) {
+
+    .info-section {
+        flex-direction: column;
+        gap: 20px;
+        scale: 1;
+    }
+
+    .bio-header {
+        flex-direction: column;
+        gap: 20px;
+        align-self: center;
+    }
+
+    .bio-footer {
+        align-self: center;
+    }
+
+    .avatar-section {
+        justify-content: start;
+    }
+}
+
+
+@media only screen and (max-width:500px) {
+    .bio-info {
+        gap: 20px;
+    }
+
+    .info-section {
+        width: 414px;
+        margin: auto;
+        margin: 15px;
+    }
+
+}
