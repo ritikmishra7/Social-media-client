@@ -52,7 +52,7 @@ function Userprofile() {
             dispatch(settoastData({ type: 'info', message: 'Following User...' }));
             const userIdToFollow = userProfile?._id;
             dispatch(FollowUnfollow({ userIdToFollow }));
-            dispatch(settoastData({ type: 'success', message: 'User Followed/Unfollowed Successfully' }));
+            dispatch(settoastData({ type: 'success', message: 'Followed/Unfollowed Successfully' }));
         } catch (error) {
 
         }

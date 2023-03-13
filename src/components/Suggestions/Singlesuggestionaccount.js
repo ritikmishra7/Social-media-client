@@ -17,7 +17,7 @@ function Singlesuggestionaccount({ suggestion }) {
             dispatch(settoastData({ type: 'info', message: 'Following User...' }));
             setFollowing(true);
             dispatch(FollowUser({ userIdToFollow: suggestion._id }))
-            dispatch(settoastData({ type: 'success', message: 'User Followed/Unfollowed Successfully' }));
+            dispatch(settoastData({ type: 'success', message: 'Followed/Unfollowed Successfully' }));
         } catch (error) {
 
         }
