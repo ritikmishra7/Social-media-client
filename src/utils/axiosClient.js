@@ -3,9 +3,15 @@ import { ACCESS_TOKEN_KEY, setItem, getItem, removeItem } from './localStorageMa
 import store from '../redux/store';
 import { setLoading, settoastData } from '../internal';
 
+let baseURL = 'http://localhost:4000/';
+
+if (process.env.NODE_ENV === 'production') {
+    baseURL = process.env.REACT_APP_SERVER_BASE_URL;
+}
+
 
 export const axiosClient = axios.create({
-    baseURL: process.env.REACT_APP_SERVER_BASE_URL,
+    baseURL: baseURL,
     withCredentials: true,
 })
 
