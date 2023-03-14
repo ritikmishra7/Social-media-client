@@ -37,6 +37,15 @@ export const LikeUnlikePost = createAsyncThunk('/posts/like', async (body) => {
     }
 })
 
+export const DeleteAccount = createAsyncThunk('/user/delete', async () => {
+    try {
+        const response = await axiosClient.delete('/user/deleteMyProfile');
+        return response.result;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+})
+
 const appConfigSlice = createSlice({
     name: 'appConfigSlice',
     initialState: {
@@ -72,6 +81,9 @@ const appConfigSlice = createSlice({
             .addCase(CreateNewPost.fulfilled, (state, action) => {
                 const post = action.payload;
                 state.myProfile.posts.unshift(post);
+            })
+            .addCase(DeleteAccount.fulfilled, (state, action) => {
+                state.myProfile = {};
             })
     }
 })

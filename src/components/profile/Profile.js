@@ -1,16 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Avatar, Button, Divider, IconButton, TextField, Tooltip, Typography } from '@mui/material'
+import { Avatar, Button, Divider, IconButton, Popover, TextField, Tooltip, Typography } from '@mui/material'
 import { RiSettings2Line } from 'react-icons/ri';
 import profileImg from '../../assets/default-profile-pic.jpg'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { settoastData, updateUserProfile } from '../../internal';
+import { DeleteAccount, settoastData, updateUserProfile } from '../../internal';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Notfound from '../../pages/Notfound/Notfound';
 import Userposts from './Userposts';
 import "./Profile.css"
+import { axiosClient } from '../../utils/axiosClient';
+import { ACCESS_TOKEN_KEY, removeItem } from '../../utils/localStorageManager';
 
 
 const style = {
@@ -30,6 +32,8 @@ function Profile() {
 
     const dispatch = useDispatch();
     const myProfile = useSelector(state => state.appConfigReducer?.myProfile);
+
+    const navigate = useNavigate();
 
     const [name, setname] = useState('');
     const [bio, setbio] = useState('');
@@ -70,7 +74,6 @@ function Profile() {
         setusername(myProfile?.username || '');
         setemail(myProfile?.email || '');
         setavatar(myProfile?.avatar?.url || '');
-
     }, [myProfile])
 
     const darkTheme = createTheme({
@@ -106,7 +109,37 @@ function Profile() {
             dispatch(settoastData({ type: 'success', message: 'Image Updated Successfully' }));
             handleClose();
         } catch (error) {
-            console.log(error);
+            // console.log(error);
+        }
+    }
+
+    // For Delete account
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleDeleteClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleDeleteClose = () => {
+        setAnchorEl(null);
+    };
+
+    const Deleteopen = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
+    async function handleDelete(e) {
+        e.preventDefault();
+        try {
+            dispatch(settoastData({ type: 'info', message: 'Deleting Account...' }));
+            dispatch(DeleteAccount());
+            const logout = await axiosClient.post('/auth/logout');
+            removeItem(ACCESS_TOKEN_KEY);
+            if (logout.status === 'ok')
+                dispatch(settoastData({ type: 'success', message: 'Account Deleted Successfully' }));
+            navigate('/auth/login');
+            handleDeleteClose();
+        } catch (error) {
+
         }
     }
 
@@ -168,9 +201,28 @@ function Profile() {
                                         </Box>
                                     </Box>
                                 </Modal>
-                                <IconButton aria-label='settings'>
+                                <IconButton aria-label='settings' onClick={handleDeleteClick}>
                                     <RiSettings2Line />
                                 </IconButton>
+                                <Popover
+                                    id={id}
+                                    open={Deleteopen}
+                                    anchorEl={anchorEl}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'center',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'left',
+                                    }}
+                                    onClose={() => { setAnchorEl(null) }}
+                                >
+                                    <Button variant="contained" size="small" sx={{ color: 'black', backgroundColor: 'red', fontWeight: '600', ':hover': { bgcolor: '#fc3d3d', color: 'black', } }} onClick={handleDelete}>
+                                        Delete Account
+                                    </Button>
+                                </Popover>
+
                             </div>
                             <div className="bio-info">
                                 <Typography variant="h6">

@@ -14,7 +14,7 @@ function Singlesuggestionaccount({ suggestion }) {
     const handleFollow = (e) => {
         e.preventDefault();
         try {
-            dispatch(settoastData({ type: 'info', message: 'Following User...' }));
+            dispatch(settoastData({ type: 'info', message: 'Following/Unfollowing User...' }));
             setFollowing(true);
             dispatch(FollowUser({ userIdToFollow: suggestion._id }))
             dispatch(settoastData({ type: 'success', message: 'Followed/Unfollowed Successfully' }));
