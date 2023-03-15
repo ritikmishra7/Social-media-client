@@ -10,12 +10,13 @@ import { AiOutlineSearch, AiOutlineLogout } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './Topbar.css';
-import { Tooltip } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { ClickAwayListener, Popper, Tooltip } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import { axiosClient } from '../../utils/axiosClient';
 import { ACCESS_TOKEN_KEY, removeItem } from '../../utils/localStorageManager';
 import { useNavigate } from 'react-router-dom';
-import { settoastData } from '../../internal';
+import { searchUser, settoastData } from '../../internal';
+import Singlesuggestionaccount from '../Suggestions/Singlesuggestionaccount';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -68,10 +69,23 @@ const darkTheme = createTheme({
     },
 });
 
-
 export default function Topbar() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
     async function handleLogout(e) {
         e.preventDefault();
 
@@ -86,55 +100,88 @@ export default function Topbar() {
         }
     }
 
+    const [searchQuery, setSearchQuery] = React.useState('');
+    const searchResults = useSelector(state => state?.appConfigReducer?.searchResults);
+    const [results, setresults] = React.useState([]);
+
+
+    React.useEffect(() => {
+        if (searchQuery !== '') {
+            dispatch(searchUser({ searchQuery }));
+        }
+    }, [searchQuery, dispatch])
+
+    React.useEffect(() => {
+        setresults(searchResults);
+    }, [searchResults])
+
 
     return (
-        <Box sx={{ flexGrow: 1, marginTop: 5 }}>
-            <ThemeProvider theme={darkTheme}>
-                <AppBar position="fixed" color="primary" enableColorOnDark>
-                    <Toolbar>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-                        >
-                            <div className="insta-box">
-                                <h3 className='my-logo'>Social Media</h3>
+        <ClickAwayListener onClickAway={handleClose}>
+            <Box sx={{ flexGrow: 1, marginTop: 5 }}>
+                <ThemeProvider theme={darkTheme}>
+                    <AppBar position="fixed" color="primary" enableColorOnDark>
+                        <Toolbar>
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="div"
+                                sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+                            >
+                                <div className="insta-box">
+                                    <h3 className='my-logo'>Social Media</h3>
+                                    <IconButton
+                                        size="small"
+                                        edge="start"
+                                        color="inherit"
+                                        aria-label="open drawer"
+                                        sx={{ mr: 2 }}
+                                    >
+                                        <MdKeyboardArrowDown />
+                                    </IconButton>
+                                </div>
+
+                            </Typography>
+                            <Search >
+                                <SearchIconWrapper>
+                                    <AiOutlineSearch />
+                                </SearchIconWrapper>
+                                <StyledInputBase
+                                    placeholder="Search…"
+                                    inputProps={{ 'aria-label': 'search' }}
+                                    value={searchQuery} onChange={(e) => {
+                                        setSearchQuery(e.target.value);
+                                    }}
+                                    onClick={handleClick}
+                                />
+                            </Search>
+                            <Tooltip title="Logout" arrow>
                                 <IconButton
-                                    size="small"
-                                    edge="start"
+                                    size="large"
+                                    edge="end"
                                     color="inherit"
                                     aria-label="open drawer"
-                                    sx={{ mr: 2 }}
-                                >
-                                    <MdKeyboardArrowDown />
+                                    sx={{ marginInline: 2 }}
+                                    onClick={handleLogout}>
+                                    <AiOutlineLogout />
                                 </IconButton>
-                            </div>
+                            </Tooltip>
+                        </Toolbar>
+                    </AppBar>
 
-                        </Typography>
-                        <Search>
-                            <SearchIconWrapper>
-                                <AiOutlineSearch />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Search…"
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
-                        </Search>
-                        <Tooltip title="Logout" arrow>
-                            <IconButton
-                                size="large"
-                                edge="end"
-                                color="inherit"
-                                aria-label="open drawer"
-                                sx={{ marginInline: 2 }}
-                                onClick={handleLogout}>
-                                <AiOutlineLogout />
-                            </IconButton>
-                        </Tooltip>
-                    </Toolbar>
-                </AppBar>
-            </ThemeProvider>
-        </Box>
+                    <Popper id={id} open={open} anchorEl={anchorEl} sx={{ zIndex: 1 }} onBlur={handleClose}>
+                        <Box sx={{ border: 1, p: 2, bgcolor: 'rgb(39,39,39)', marginTop: '20px' }}>
+                            {results?.length > 0 ? results?.map((result) => {
+                                return <Singlesuggestionaccount key={result._id} suggestion={result} closed={handleClose} />
+                            }) :
+                                <div className="no-results">
+                                    <Typography variant="h6" color="white">No Results Found</Typography>
+                                </div>
+                            }
+                        </Box>
+                    </Popper>
+                </ThemeProvider>
+            </Box>
+        </ClickAwayListener >
     );
 }

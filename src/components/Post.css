@@ -29,6 +29,18 @@
     cursor: pointer;
 }
 
+.content {
+    position: relative;
+}
+
+.heart-box {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    display: none;
+    transition: all 0.5s ease;
+}
+
 /* post footer */
 .post-footer {
     display: flex;
@@ -60,6 +72,20 @@
 
 .comment-box {
     position: relative;
+}
+
+.comment-btn {
+    position: absolute;
+    font-size: medium;
+    right: 30px;
+    outline: none;
+    border: none;
+    background-color: inherit;
+    color: rgb(0, 149, 246);
+}
+
+.comment-btn:hover {
+    cursor: pointer;
 }
 
 .emoji-Icon {

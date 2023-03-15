@@ -24,7 +24,7 @@
 .user-bio-section {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
     align-items: baseline;
 }
 

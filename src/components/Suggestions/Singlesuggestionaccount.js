@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Avatar, Button } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import profileImg from '../../assets/default-profile-pic.jpg';
 import { FollowUser, settoastData } from '../../internal';
 
-function Singlesuggestionaccount({ suggestion }) {
+
+function Singlesuggestionaccount({ suggestion, closed }) {
 
     const dispatch = useDispatch();
     const [following, setFollowing] = useState(false);
@@ -15,18 +16,33 @@ function Singlesuggestionaccount({ suggestion }) {
         e.preventDefault();
         try {
             dispatch(settoastData({ type: 'info', message: 'Following/Unfollowing User...' }));
-            setFollowing(true);
+            setFollowing(!following);
             dispatch(FollowUser({ userIdToFollow: suggestion._id }))
             dispatch(settoastData({ type: 'success', message: 'Followed/Unfollowed Successfully' }));
+            window.location.reload(false);
         } catch (error) {
 
         }
     }
 
+    function handleOpenProfile(e) {
+        e.preventDefault();
+        navigate(`/userProfile/${suggestion?._id}`);
+        if (closed)
+            closed();
+    }
+
+    useEffect(() => {
+        if (suggestion?.isFollowing) {
+            setFollowing(true);
+        } else {
+            setFollowing(false);
+        }
+    }, [suggestion])
+
     return (
         <div className="suggestion-account">
-            <div className="suggestion-account-left-side" onClick={() => { navigate(`/userProfile/${suggestion?._id}`) }}>
-                {/* <img src={suggestion?.avatar?.url ? suggestion?.avatar?.url : profileImg} alt="profile-pic" className='storyImg-box' /> */}
+            <div className="suggestion-account-left-side" onClick={handleOpenProfile}>
                 <Avatar
                     alt="profile-pic"
                     src={suggestion?.avatar?.url ? suggestion?.avatar?.url : profileImg}
@@ -38,7 +54,7 @@ function Singlesuggestionaccount({ suggestion }) {
                 </div>
             </div>
             <div className="follow-btn">
-                {following ? <Button variant="contained" size="small" sx={{ color: 'black', backgroundColor: 'white', fontWeight: '600', ':hover': { bgcolor: '#cfcfcf', color: 'black', } }}>
+                {following ? <Button variant="contained" size="small" sx={{ color: 'black', backgroundColor: 'white', fontWeight: '600', ':hover': { bgcolor: '#cfcfcf', color: 'black', } }} onClick={handleFollow}>
                     Following
                 </Button> :
                     <Button variant="contained" size="small" sx={{ color: 'black', backgroundColor: '#42a5f5', fontWeight: '600', ':hover': { bgcolor: '#90caf9', color: 'black', } }} onClick={handleFollow}>

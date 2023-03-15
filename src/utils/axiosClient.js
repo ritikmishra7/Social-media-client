@@ -19,7 +19,9 @@ export const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
 
     (request) => {
-        store.dispatch(setLoading(true));
+        if (request.url !== '/user/searchUser')
+            store.dispatch(setLoading(true));
+
         const accessToken = getItem(ACCESS_TOKEN_KEY);
         request.headers['Authorization'] = `Bearer ${accessToken}`;
 

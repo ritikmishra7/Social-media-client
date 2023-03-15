@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { FaRegComment } from 'react-icons/fa';
@@ -23,6 +23,8 @@ function Post({ post }) {
     const userId = params.userId;
     const myProfile = useSelector(state => state?.appConfigReducer?.myProfile);
 
+    const heartRef = useRef(null);
+
     function handleEmojiCLick(emojiData) {
         const newComment = comment + emojiData.native;
         setComment(newComment);
@@ -35,10 +37,24 @@ function Post({ post }) {
         }
     }
 
+    function handledoubleClick(e) {
+        e.preventDefault();
+        if (heartRef !== null) {
+            heartRef.current.style.display = 'block';
+            setTimeout(() => {
+                heartRef.current.style.display = 'none';
+            }, 1000);
+        }
+
+        if (post?.isLiked === false) {
+            handleLikeUnlike(e);
+        }
+    }
+
     function handleLikeUnlike(e) {
         e.preventDefault();
         try {
-            dispatch(settoastData({ type: 'info', message: 'Liking Post...' }));
+            // dispatch(settoastData({ type: 'info', message: 'Liking Post...' }));
             if (userId === myProfile?._id) {
                 dispatch(LikeUnlikePost({ postId: post._id }));
             }
@@ -48,12 +64,22 @@ function Post({ post }) {
             else {
                 dispatch(LikeUnlikeFeed({ postId: post._id }));
             }
-            dispatch(settoastData({ type: 'success', message: 'Post Liked/Unliked Successfully' }));
+            // dispatch(settoastData({ type: 'success', message: 'Post Liked/Unliked Successfully' }));
         } catch (error) {
 
         }
+    }
 
+    function handlePostComment(e) {
+        e.preventDefault();
+        try {
+            dispatch(settoastData({ type: 'info', message: 'Posting Comment...' }));
+            // dispatch(PostComment({ postId: post._id, comment: comment }));
+            dispatch(settoastData({ type: 'success', message: 'Comment Posted Successfully' }));
+            setComment('');
+        } catch (error) {
 
+        }
     }
 
     return (
@@ -74,9 +100,11 @@ function Post({ post }) {
                 </div>
             </div>
             <div className="content">
-                {post?.image?.url ? <img src={post?.image?.url} alt="post-img" className='post-img' /> : <div className="caption-section caption-without-image">
-                    <div>{post?.caption}</div>
-                </div>}
+                {post?.image?.url ? <><img src={post?.image?.url} alt="post-img" className='post-img' onDoubleClick={handledoubleClick} />
+                    <div className="heart-box" ref={heartRef}><AiFillHeart size={140} /></div></>
+                    : <div className="caption-section caption-without-image">
+                        <div>{post?.caption}</div>
+                    </div>}
             </div>
             <div className="post-footer">
                 <div className="post-datas">
@@ -93,8 +121,12 @@ function Post({ post }) {
                 </div> : <></>}
                 <div className="comment-box">
                     <input type="text" value={comment} onChange={(e) => setComment(e.target.value)} className='comment-input' placeholder='Add a comment...' onClick={handleClickonComment} />
+                    {comment && <button className='comment-btn' onClick={handlePostComment} >Post</button>}
                     <BsEmojiSmile className='emoji-Icon' onClick={(e) => setEmojipick(!emojiClick)} />
                     {emojiClick && <div className='emoji-picker-container'><Picker previewPosition='none' data={data} onEmojiSelect={handleEmojiCLick} /></div>}
+                </div>
+                <div className="all-comments">
+                    { }
                 </div>
                 <p className='time-ago'>{post?.timeAgo}</p>
             </div>

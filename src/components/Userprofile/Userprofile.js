@@ -84,11 +84,11 @@ function Userprofile() {
                                 <Link to='/users/followers' style={{ textDecoration: 'none', color: 'inherit' }}>{userProfile?.followers?.length || '0'} followers</Link>
                             </Typography>
                             <Typography variant="h6">
-                                <Link to='/users/followings' style={{ textDecoration: 'none', color: 'inherit' }}>{userProfile?.following?.length || '0'} following</Link>
+                                <Link to='/users/followings' style={{ textDecoration: 'none', color: 'inherit' }}>{userProfile?.followings?.length || '0'} following</Link>
                             </Typography>
                         </div>
                         <div className="user-bio-footer">
-                            <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+                            <Typography variant="h6" sx={{ fontWeight: '600' }}>
                                 {name}
                             </Typography>
                             {bio ? <Typography variant="subtitle1">

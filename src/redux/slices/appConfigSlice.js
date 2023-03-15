@@ -46,12 +46,22 @@ export const DeleteAccount = createAsyncThunk('/user/delete', async () => {
     }
 })
 
+export const searchUser = createAsyncThunk('/user/searchUser', async (body) => {
+    try {
+        const response = await axiosClient.post('/user/searchUser', body);
+        return response.result.users;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+})
+
 const appConfigSlice = createSlice({
     name: 'appConfigSlice',
     initialState: {
         isLoading: false,
         toastData: {},
-        myProfile: {}
+        myProfile: {},
+        searchResults: [],
     },
     reducers: {
         setLoading: (state, action) => {
@@ -84,6 +94,9 @@ const appConfigSlice = createSlice({
             })
             .addCase(DeleteAccount.fulfilled, (state, action) => {
                 state.myProfile = {};
+            })
+            .addCase(searchUser.fulfilled, (state, action) => {
+                state.searchResults = action.payload;
             })
     }
 })
