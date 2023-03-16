@@ -28,6 +28,16 @@ export const FollowUser = createAsyncThunk('user/follow', async (body) => {
     }
 })
 
+export const CommentonPost = createAsyncThunk('posts/comment', async (body) => {
+    try {
+        const response = await axiosClient.post('/posts/comment', body);
+        return response.result.post;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+})
+
+
 const feedSlice = createSlice({
     name: 'feedSlice',
     initialState: {
@@ -56,6 +66,16 @@ const feedSlice = createSlice({
 
                 if (index !== -1 && index !== undefined) {
                     state.feedData.Suggestions.splice(index, 1);
+                }
+            })
+            .addCase(CommentonPost.fulfilled, (state, action) => {
+                const post = action.payload;
+
+                //finding this post in feedData
+                const index = state?.feedData?.posts?.findIndex((p) => p._id === post._id);
+
+                if (index !== -1 && index !== undefined) {
+                    state.feedData.posts[index] = post;
                 }
             })
     }

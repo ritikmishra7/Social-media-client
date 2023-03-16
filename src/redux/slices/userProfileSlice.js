@@ -28,6 +28,16 @@ export const FollowUnfollow = createAsyncThunk('user/follow', async (body) => {
     }
 })
 
+export const commentOnUserPost = createAsyncThunk('/posts/comment', async (body) => {
+    try {
+        const response = await axiosClient.post('/posts/comment', body);
+        return response.result.post;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+})
+
+
 const userProfileSlice = createSlice({
     name: 'userProfileSlice',
     initialState: {
@@ -54,6 +64,12 @@ const userProfileSlice = createSlice({
                 state.userProfile.isFollowing = result?.isFollowing;
             })
             .addCase(LikeUnlikeUserPost.fulfilled, (state, action) => {
+                const post = action.payload;
+                const index = state.userProfile?.posts?.findIndex((p) => p._id === post._id);
+                if (index !== -1 && index !== undefined)
+                    state.userProfile.posts[index] = post;
+            })
+            .addCase(commentOnUserPost.fulfilled, (state, action) => {
                 const post = action.payload;
                 const index = state.userProfile?.posts?.findIndex((p) => p._id === post._id);
                 if (index !== -1 && index !== undefined)

@@ -70,6 +70,10 @@
 
 }
 
+.comment-input:focus {
+    border-bottom: 1px solid rgb(0, 149, 246);
+}
+
 .comment-box {
     position: relative;
 }
@@ -106,6 +110,7 @@
     position: absolute;
     bottom: 40px;
     right: 5px;
+    z-index: 1;
 }
 
 .caption-without-image {
@@ -116,8 +121,15 @@
 
 .hover-grey:hover {
     color: rgb(197, 197, 197);
+    cursor: pointer;
 }
 
 .time-ago {
     color: rgb(184, 184, 184);
+}
+
+.post-response-count {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
 }

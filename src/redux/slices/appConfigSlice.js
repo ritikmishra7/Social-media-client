@@ -55,6 +55,16 @@ export const searchUser = createAsyncThunk('/user/searchUser', async (body) => {
     }
 })
 
+export const commentOnMyPost = createAsyncThunk('/posts/comment', async (body) => {
+    try {
+        const response = await axiosClient.post('/posts/comment', body);
+        return response.result.post;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+})
+
+
 const appConfigSlice = createSlice({
     name: 'appConfigSlice',
     initialState: {
@@ -97,6 +107,16 @@ const appConfigSlice = createSlice({
             })
             .addCase(searchUser.fulfilled, (state, action) => {
                 state.searchResults = action.payload;
+            })
+            .addCase(commentOnMyPost.fulfilled, (state, action) => {
+                const post = action.payload;
+
+                //finding this post in myProfile
+                const index = state?.myProfile?.posts?.findIndex((p) => p._id === post._id);
+
+                if (index !== -1 && index !== undefined) {
+                    state.myProfile.posts[index] = post;
+                }
             })
     }
 })
