@@ -3,15 +3,8 @@ import { ACCESS_TOKEN_KEY, setItem, getItem, removeItem } from './localStorageMa
 import store from '../redux/store';
 import { setLoading, settoastData } from '../internal';
 
-let baseURL = 'http://localhost:4000/';
-
-if (process.env.NODE_ENV === 'production') {
-    baseURL = process.env.REACT_APP_SERVER_BASE_URL;
-}
-
-console.log(baseURL);
 export const axiosClient = axios.create({
-    baseURL: baseURL,
+    baseURL: process.env.REACT_APP_BASE_URL,
     withCredentials: true,
 })
 
@@ -57,7 +50,7 @@ axiosClient.interceptors.response.use(
         if (statusCode === 401) {    //get new accessToken from refresh api as access token has expired
             const responseFromrefresh = await axios.create({
                 withCredentials: true
-            }).get(`${baseURL}auth/refresh`);
+            }).get(`${process.env.REACT_APP_BASE_URL}auth/refresh`);
 
             if (responseFromrefresh.data.status === 'ok') {
                 setItem(ACCESS_TOKEN_KEY, responseFromrefresh.data.result.accessToken);
