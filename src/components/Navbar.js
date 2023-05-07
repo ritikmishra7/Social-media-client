@@ -110,7 +110,7 @@ function Navbar() {
         </> :
             <ThemeProvider theme={darkTheme}>
                 <div className='navContainer'>
-                    <h3 className='my-logo hideThis'>Social Media</h3>
+                    <h3 className='my-logo hideThis'>Social Sphere</h3>
                     <div className='logo showThis'>
                         <AiOutlineInstagram size={40} />
                     </div>

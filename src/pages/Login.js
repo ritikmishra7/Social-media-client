@@ -69,7 +69,7 @@ function Login() {
         <ThemeProvider theme={darkTheme}>
             <div className="sign-up center-thing">
                 <div className='signup-wrapper'>
-                    <p className='my-logo'>Social Media</p>
+                    <p className='my-logo'>Social Sphere</p>
                     <p className='logo-message'>Log in to see photos and videos from your friends.   </p>
 
                     <form className='signup-form' onSubmit={handleSubmit}>

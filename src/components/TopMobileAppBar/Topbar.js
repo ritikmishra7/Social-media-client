@@ -129,7 +129,7 @@ export default function Topbar() {
                                 sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                             >
                                 <div className="insta-box">
-                                    <h3 className='my-logo'>Social Media</h3>
+                                    <h3 className='my-logo'>Social Sphere</h3>
                                     <IconButton
                                         size="small"
                                         edge="start"
